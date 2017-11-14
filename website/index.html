@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlightingOnLoad(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Pesquisa Reproduzivel no R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa fa fa-home"></span>
+     
+    Introducao
+  </a>
+</li>
+<li>
+  <a href="data.html">
+    <span class="fa fa fa fa-table"></span>
+     
+    Datasets
+  </a>
+</li>
+<li>
+  <a href="code.html">
+    <span class="fa fa fa fa-file-code-o"></span>
+     
+    Data analysis
+  </a>
+</li>
+<li>
+  <a href="article.html">
+    <span class="fa fa fa fa-file-text-o"></span>
+     
+    Manuscript
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/emdelponte/pesquisa-reproduzivel-R">
+    <span class="fa fa-github-square"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="definiaaes" class="section level2">
+<h2>DefiniÃ§Ãµes</h2>
+<p>AA Pesquisa ReproduzÃ­vel (PR) tem a caracterÃ­stica de reprodutibilidade, ou seja, a habilidade de um pesquisador em obter os resultados de um estudo prÃ©vio usando os mesmos materiais (dados) e mÃ©todos (estatÃ­stica) da pesquisa original. Portanto, a condiÃ§Ã£o <em>sine qua non</em> para que isso seja possÃ­vel Ã© que o pesquisador independente tenha a) acesso aos dados e b) saiba detalhes de como a anÃ¡lise foi feita.</p>
+<p>Em ciÃªncia, essa deve ser uma condiÃ§Ã£o mÃ­nima para que um resultado tenha veracidade. Parte-se do princÃ­pio de que os resultados de uma pesquisa quando publicados em revistas cientÃ­ficas com corpo editorial tenham sido obtidos segundo os princÃ­pios e a Ã©tica cientÃ­fica. No entanto, os editores e revisores, quase sempre, nÃ£o tem como verificar se todos os passos do trabalho, especialmente a anÃ¡llise dos dados, foram executados corretamente, jÃ¡ que recebem apenas uma parte do “produto final”, ou seja, o artigo cientÃ­fico. Esse deve conter as informaÃ§Ãµes mÃ­nimas necessÃ¡rias descritas de maneira clara o suficiente para que o trabalho seja avaliado pelos pares.</p>
+<p>O termo reprodutibilidade Ã© bastante atual e pode ter vÃ¡rias definiÃ§Ãµes dependendo do contexto. Diversas matÃ©rias na mÃ­dia acadÃªmica comentam sobre a atual <strong>crise de reprodutibilidade na ciÃªncia</strong> a qual Ã© reconhecida principalmente pelos pesquisadores. O que seria esse fenÃ´meno? A tal crise se refere a um tipo de reprodutibilidade, diferente do que serÃ¡ tratado aqui. Ã‰ reprodutibilidade <strong>inferencial</strong>, que pode ser chamada de <strong>replicabilidade</strong>. Definindo, Ã© a capacidade de obter um mesmo resultado ou conclusÃ£o de uma pesquisa anterior com a conduÃ§Ã£o de uma nova pesquisa, ou seja, novos dados obtidos para responder uma mesma questÃ£o.</p>
+</div>
+<div id="crise-de-reprodutibilidade" class="section level2">
+<h2>Crise de reprodutibilidade</h2>
+<p>A crise de reprodutibilidade estÃ¡ associada aos casos nÃ£o tÃ£o incomuns de experimentos (Ã¡rea farmacÃªutica, por exemplo) que sÃ£o conduzidos para avaliar a eficÃ¡cia de algum produto e, que, por algum motivo, novos experimentos nÃ£o confirmam os resultados anteriores. HÃ¡ muita discussÃ£o sobre as possÃ­veis causas da falta de “replicabilidade”, incluindo-se aspectos relacinados Ã  viÃ©s seletivo, mÃ©todos estatÃ­sticos inapropriados, bem como uma falta de maior transparÃªncia sobre os dados e o processo analÃ­tico.</p>
+<p>No contexto em que iremos trabalhar, a pesquisa reproduzÃ­vel (PR), assumindo os mesmos dados e procedimentos, apresenta inÃºmeras vantagens como dar transparÃªncia e confiabilidade Ã  anÃ¡lise, alÃ©m de permitir que se detectem erros de anÃ¡lise, o que nÃ£o Ã© incomum. Ela nÃ£o resolve o problema da crise replicabilidade jÃ¡ que problemas de deficiÃªncia ou equÃ­vocos em dados ou anÃ¡lise, ou mesmo mÃ¡ conduta cientÃ­fica, podem ocorrer.</p>
+<p>No entanto Ã© reconhecido que o uso de boas prÃ¡ticas de PR visam a atender essa demanda por maior transparÃªncia na pesquisa. AlÃ©m disso, permite que os dados gerados pelos pesquisadores nÃ£o fiquem “engavetados” mas que possam ser reusados ou reanalisados. Atualmente, agÃªncias de fomento e a comunidade cientÃ­fia tem exigido ou estimulado que dados e cÃ³digos sejam cada vez mais compartilhados e novas ferramentas tem surgido para facilitar esse processo e permitir que pesquisadores obtenham crÃ©dito e reconhecimento.</p>
+</div>
+<div id="um-projeto-reproduzavel" class="section level2">
+<h2>Um projeto reproduzÃ­vel</h2>
+<p>Para um estudante ou cientista que estÃ¡ iniciando um projeto Ã© importante que as boas prÃ¡ticas de PR sejam incorporadas no seu dia a dia, e que sejam implementadas desde a concepÃ§Ã£o e o planejamento do mesmo.</p>
+<p>SÃ£o atividades que dependem essencialmente de uma grande capacidade organizacional e admistrativa de tempo e esforÃ§o no planejamento, conduÃ§Ã£o e documentaÃ§Ã£o de tudo que Ã© feito. Ã‰ preciso seguir rotinas e gerar documentos que seguem certas normas de padronizaÃ§Ã£o, especialmente se o trabalho Ã© feito de forma colaborativa. Analogamente, Ã© como escrever e formatar um artigo cientÃ­fico que deve ser estruturado e apresentado segundo determinadas normas. Aqui, o produto gerado nÃ£o Ã© somente o documento do manuscrito e um punhado de grÃ¡ficos, mas sim tudo que foi gerado durante a pesquisa e que precisa estar bem organizado e formatado para uso posterior e publicaÃ§Ã£o/divulgaÃ§Ã£o. Para obter sucesso na implementaÃ§Ã£o de uma PR, Ã© preciso:</p>
+<ul>
+<li>Ser diligente e sistemÃ¡tico</li>
+<li>Aprender novas ferramentas (computacionais)</li>
+<li>Aprender a organizar arquivos diversos</li>
+<li>Documentar todas as etapas do trabalho</li>
+</ul>
+<p>No dia a dia, os pesquisadores nÃ£o sobrevivem se os computadores como ferramenta central de trabalho. Atualmente, nÃ£o Ã© preciso ser um “nerd” para que se possa utilizar com bastante eficiÃªncia os computadores que estÃ£o hoje cada vez mais portÃ¡teis e de fÃ¡cil uso, para ser eficiente e produtivo no trabalho. Em algumas Ã¡reas da pesquisa Ã© necessÃ¡rio maior envolvimento com linguagens de programaÃ§Ã£o, programas especÃ­ficos que exigem um esforÃ§o de aprendizado.</p>
+<p>No entanto, na PR o mais importante e desafior Ã© certamente aprender a sistemÃ¡tica de trabalho do que ser um expert em programaÃ§Ã£o - mas Ã© necessÃ¡rio sim aprender alguma linguagem de programaÃ§Ã£o (R ou Python) para implementar as prÃ¡ticas de PR. Durante nossa formaÃ§Ã£o acadÃªmica nÃ£o recebemos nenhum ou muito pouco treinamento em como preparar e organizar de maneira apropriadas os arquivos diversos incluindo dados, cÃ³digos, grÃ¡ficos, tabelas, manuscrito, figuras, etc.</p>
+<p>Apender uma rotina de PR Ã© fundamental para:</p>
+<ol style="list-style-type: decimal">
+<li>Facilitar o nosso prÃ³prio trabalho de anÃ¡lise-reanÃ¡lise</li>
+<li>Permitir o uso dos dados e cÃ³digos por outras pessoas (seu orientador!)</li>
+<li>Compartilhar a “pipeline” da anÃ¡lise, ou seja, explicar o que, por que e como foi feito</li>
+</ol>
+<p>Quando nÃ£o somos treinados a trabalhar seguindo as boas prÃ¡ticas de PR, Ã© muito comum: criar um nÃºmero grande arquivos e versÃµes desnecessÃ¡rias que dificultam o processo; gerar inconsistÃªncia e redundÃ¢ncia nas anÃ¡lises; nÃ£o ter um controle adequado de versÃµes e dificuldade quando Ã© solicitado o compartilhamento do trabalhos - ou seja, levarÃ¡ um tempo grande sÃ³ para organizar a “bagunÃ§a” que foi gerada durante o processo e que sÃ³ o prÃ³prio pesquisador entende, quando entende! PrÃ¡ticas que deveriam ser simples como refazer um grÃ¡fico ou estatÃ­sticas apÃ³s receber os pareceres de revisores se tornam um verdadeiro pesadelo para alguns pesquisadores, o que contribui para o atraso na publicaÃ§Ã£o de artigos.</p>
+<div id="ambiente-computacional" class="section level3">
+<h3>Ambiente computacional</h3>
+<p>Segundo <a href="https://yihui.name">Yihui Xie</a>, um dos principais desenvolvedores do R da empresa RStudio de programas (ex. knitr, rMarkdown, bookdown, etc) que visam facilitar a pesquisa reproduzÃ­vel:</p>
+<blockquote>
+<p>The final product of research is not only the paper itself, but also the full computation environment used to produce the results in the paper such as the code and data necessary for reproduction of the results and building upon the research (Xie et al. 2014).</p>
+</blockquote>
+<p>Dentre os ambientes de programaÃ§Ã£o disponÃ­veis, as ferramentas mais usadas para implementar uma PR de maneira efetiva (dados, anÃ¡lises e saÃ­das sÃ£o combinados, idealmente, em um Ãºnico ambiente de programaÃ§Ã£o), sÃ£o baseados em duas linguagens principais: Python e R, cujos produtos principais sÃ£o Jupyter Notebooks e RMarkdown, respectivamente. Esses pacotes ou rotinas facilitam sobremaneira a documentaÃ§Ã£o e reproduÃ§Ã£o das anÃ¡lises bem como aceleram a obtenÃ§Ã£o dos resultados e visualizaÃ§Ãµes assim que novos dados forem adicionados ou reanÃ¡lises sÃ£o necessÃ¡rias.</p>
+<p>AlÃ©m de aprender a utilizar esses programas, Ã© importante que o pesquisador aprenda como usar efetivamente planilhas eletrÃ´nicas para reunir e organizar os dados que serÃ£o usados na pesquisa. Por princÃ­pios, as planilhas eletrÃ´nicas como Excel, Libre Office Calc, Numbers e Google Sheets sÃ£o usadas apenas para armazenar os dados e nÃ£o para processar, transformar, visualizar ou fazer sumÃ¡rios prÃ©vios. O motivo Ã© muito simples: esses procedimentos todos feitos com movimentos de mouse nÃ£o sÃ£o reproduzÃ­veis! alÃ©m disso, na PR os dados originais levantados ou recebidos devem ser mantidos na sua forma original. Caso seja modificado de forma que Ã© mais fÃ¡cil fazer em uma planilha como renomear variÃ¡veis, Ã© importante manter sempre uma planilha nÃ£o manipulada como referÃªncia.</p>
+</div>
+<div id="compendium-da-pesquisa" class="section level3">
+<h3>Compendium da pesquisa</h3>
+<p>O termo compÃªndio de pesquisa (<a href="https://github.com/ropensci/rrrpkg">Research Compendia</a> foi cunhado em meados dos anos 90.</p>
+<blockquote>
+<p>We introduce the concept of a compendium as both a container for the different elements that make up the document and its computations (i.e. text, code, data,…), and as a means for distributing, managing and updating the collection. - Gentleman, R. and Temple Lang, D. (2004)</p>
+</blockquote>
+<p>O compÃªndio nada mais Ã© do que um mÃ©todo padronizado e facilmente reconhecido de organizar os materiais digitais de um projeto de pesquisa para que outros possam inspecionar, reproduzir e ampliar a pesquisa. PrincÃ­pios bÃ¡sicos sÃ£o:</p>
+<ol style="list-style-type: decimal">
+<li>Organizar segundo a convenÃ§Ã£o criada pela academia</li>
+<li>Separar claramente os dados, os mÃ©todos e as saÃ­das</li>
+<li>Especificar o ambiente computacional usado na anÃ¡lise (texto com a descriÃ§Ã£o, versÃ£o, etc)</li>
+</ol>
+<p>O objetivo de criar um compÃªndio de pesquisa Ã© para facilitar a distribuiÃ§Ã£o dos produtos gerados pela pesquisa. AlÃ©m disso, a eficiÃªncia do trabalho Ã© aumentada com a incorporaÃ§Ã£o de uma sistemÃ¡tica que pode ser replicada em outros projetos, dimuindo assim os custos operacionais e acelerando o trabalho. Tem se discutido que publicaÃ§Ãµes que sÃ£o acompanhas de um compÃªndio tendem a receber maior atenÃ§Ã£o, credibilidade e citaÃ§Ãµes uma vez que o compendio Ã© uma publicaÃ§Ã£o separada. Certamente, quando publicada anteriormente Ã  submissÃ£o do trabalho, os editores e revisores terÃ£o um trabalho muito mais facilitado para revisar os mÃ©todos (estatÃ­sticos principalmente) que foram utilizados e entender as decisÃµes tomadas no processo analÃ­tico. Alem disso, autores poderÃ£o receber um retorno da acadÃªmica e dos revisores para melhorarem o trabalho como um todo.</p>
+<p>Antes de falarmos sobre como organizar o compÃªndio de pesquisa, veremos aspectos e cuidados especÃ­ficos de organizaÃ§Ã£o dos dados.</p>
+</div>
+<div id="dados" class="section level3">
+<h3>Dados</h3>
+<p>Segundo Wilkinson et al. (2016), os dados devem ser organizados segundo o princÃ­pio <strong>FAIR</strong> = <strong>F</strong>indable, <strong>A</strong>ccessible, <strong>I</strong>nteroperable and <strong>R</strong>eusable.</p>
+<p>Compartilhar os dados (o que pode ser aplicado tambÃ©m aos cÃ³digos, significa facilitar a distribuiÃ§Ã£o e o acesso pela comunidade cientÃ­fica, ou seja que eles sejam facilmente <strong>encontrados</strong> e <strong>acessados</strong>. Qual a vantagem disso? reproduzir os resultados originais e pertimitir que novas anÃ¡lises sejam feitas usando os mesmos dados, ou mesmo combinando com outros conjuntos de dados (metanÃ¡lise). Ã‰ importante que os dados estejam em um formato que seja de fÃ¡cil entendimento para facilitar o uso. TrÃªs boas prÃ¡ticas sÃ£o recomendadas:</p>
+<ol style="list-style-type: decimal">
+<li>DocumentaÃ§Ã£o: dados bem documentados e descritos (metadados) sÃ£o mais fÃ¡ceis de entender</li>
+<li>FormataÃ§ao: dados formatados apropriadamente podem ser usados em diversos programas de computador</li>
+<li>DistribuiÃ§Ã£o: depÃ³sito em repositÃ³rios conhecidos e com licenÃ§a aberta facilita que sejam encontrados e reusados</li>
+</ol>
+<p>PrÃ¡ticas de compartilhamento de dados talvez ainda nÃ£o sejam valorizadas pela maioria dos pesquisadores, haja visto que a maioria dos trabalhos ainda nÃ£o disponibilizam os dados originais. As vantagens Ã³bvias seria a reproduÃ§Ã£o e possÃ­vel melhorias na anÃ¡lise, o reuso dos dados em metanÃ¡lises para chegar a conclusÃµes gerais e gerar novo conhecimento que sÃ³ Ã© possÃ­vel com dados compartilhados em larga escala. Mas por que ainda os pesquisadores nÃ£o compartilham os dados? os motivos podem ser ligados ao receio de perder uma competiÃ§Ã£o por publicaÃ§Ãµes ou mesmo a falta de conhecimento sobre como fazer o compartilhamento. A percepÃ§Ã£o que domina Ã© que organizar e depositar dados Ã© difÃ­cil tecnicamente ou leva muito tempo,</p>
+</div>
+<div id="formato" class="section level3">
+<h3>Formato</h3>
+</div>
+<div id="planilhas-eletronicas" class="section level3">
+<h3>Planilhas eletronicas</h3>
+</div>
+<div id="nomes" class="section level3">
+<h3>Nomes</h3>
+</div>
+<div id="copias" class="section level3">
+<h3>Copias</h3>
+</div>
+<div id="formato-1" class="section level3">
+<h3>Formato</h3>
+</div>
+<div id="depasito" class="section level3">
+<h3>DepÃ³sito</h3>
+</div>
+<div id="licenaa" class="section level3">
+<h3>LicenÃ§a</h3>
+</div>
+<div id="criando-um-compendium" class="section level3">
+<h3>Criando um compendium</h3>
+<div id="estrutura" class="section level4">
+<h4>Estrutura</h4>
+<ul>
+<li>simples arquivo R comentado</li>
+<li>Arquivo Rmd (texto, dados e saÃ­das)</li>
+</ul>
+<p>Exemplo</p>
+<div style="white-space: pre-line;">- DESCRIPTION # Metadados do projeto e dependÃªncias
+- LICENSE
+- README.md # DescriÃ§Ã£o do conteÃºodo e guia para usuÃ¡rios
+- data/ # dados originais quando criados e nao modificaos
+  +- my_data.csv # arquivo de dados em formatos abertos (CSV)
+- analysis/ # qualquer cÃ³digo da anÃ¡lise
+  +- my_scripts.R # CÃ³digo R usado para analisar e visualizar os dados
+  +- my_scripts.Rmd</div>
+</div>
+</div>
+<div id="rmarkdown" class="section level3">
+<h3>RMarkdown</h3>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
